@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas
 
+# Set webpage layout to wide
 st.set_page_config(layout="wide")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.image("images/photo.png")
+    st.image("images/my_photo.jpg")
 
 with col2:
     st.title("Thien Nguyen")
@@ -30,19 +31,28 @@ Below you can find some of the apps I have built in Python. Feel free to contact
 """
 st.write(content2)
 
-col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
+# Prepare the columns
+col3, col4, col5 = st.columns(3)
 
+# Make a dataframe with the company members
 df = pandas.read_csv("data.csv", sep=";")
 
 with col3:
-    for index, row in df.iterrows():
+    for index, row in df[:6].iterrows():
         st.header(row["title"])
         st.write(row["description"])
         st.image("images/" + row["image"])
         st.write(f"[Source Code]({row['url']})")
 
 with col4:
-    for index, row in df[10:].iterrows():
+    for index, row in df[6:12].iterrows():
+        st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row["image"])
+        st.write(f"[Source Code]({row['url']})")
+
+with col5:
+    for index, row in df[12:18].iterrows():
         st.header(row["title"])
         st.write(row["description"])
         st.image("images/" + row["image"])
